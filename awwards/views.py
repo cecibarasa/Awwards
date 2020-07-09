@@ -3,7 +3,8 @@ from django.http import HttpResponse
 import datetime as dt
 
 def index(request):
-    return HttpResponse('Awwards')
+    date = dt.date.today()
+    return render(request, 'index.html', {"date":date})
 
 def awward_of_day(request):
     date = dt.date.today()
