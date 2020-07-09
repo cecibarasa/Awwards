@@ -7,7 +7,8 @@
     <title>AWWARDS - {{title}}</title>
     {% else %}
     <title> AWWARDS </title>
-    {% endif %} {% block styles %} {% bootstrap_css %} {% endblock %}
+    {% endif %} {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">{% endblock %}
 </head>
 
 <body>
