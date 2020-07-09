@@ -4,6 +4,7 @@ import datetime as dt
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from .forms import *
 
 def index(request):
     awwards = Project.todays_awward()
@@ -85,4 +86,4 @@ def signup(request):
         register_form = {
             'form': form,
         }
-    return render(request, 'django-registration/registration_form.html', {'form': form})                    
+    return render(request, 'django_registration/registration_form.html', {'form': form})                    

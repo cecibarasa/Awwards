@@ -1,37 +1,26 @@
-{%extends "base.html"%} {% load bootstrap3 %} {% block content %}
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
 <div class="container">
+
     <div class="row">
-        <!-- Empty div -->
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            {% if form.errors %}
-            <p> Some Information Might be Incorrect </p>
-            {% endif %}
-            <div class="panel panel-default">
-
-                <div class="panel-heading">
-                    <h3 class="text-center">Sign Up</h3>
+        self.assertLess(before, after) def testDeleteProject(self): before = Project.objects.all() self.new_project.delete() after = Project.objects.all()
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="card" style="margin-top:5%; padding:20px">
+                <div class="card-body">
+                    <h5 class="card-title"><a>Sign in to continue</a> <span style="float:right">No? <a
+                            href="{% url 'signup' %}" class="text-info">Register now</a></span></h5>
+                    <div class="card-text">
+                        <form action="" method="post" novalidate style="margin:20px">
+                            {% csrf_token%} {{ form|crispy}}
+                            <button type="submit" class="btn btn-info btn-sm">Login</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="panel-body">
-
-                    <form action="/accounts/register/" method="post">
-                        {% csrf_token %} {% bootstrap_form form %}
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-                        </div>
-
-                        <input type="hidden" name="next" value="{{next}}">
-
-                    </form>
-
-                </div>
-
             </div>
 
         </div>
-        <!-- empty div -->
-        <div class="col-md-4"></div>
+        <div class="col-md-2"></div>
     </div>
-</div>
 
+</div>
 {% endblock %}
