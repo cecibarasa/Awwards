@@ -7,9 +7,15 @@ from django.contrib.auth import authenticate, login
 from .forms import *
 
 def index(request):
+    current_user = request.user
     awwards = Project.todays_awward()
     date = dt.date.today()
-    return render(request, 'index.html', {"date": date, "awwards": awwards})
+    project_images = Project.fetch_all_images()
+    image_params = {
+        'all_images': project_images,
+        'current_user': current_user,
+    }
+    return render(request, "index.html", image_params)                              
 
 def search_results(request):
 
@@ -125,5 +131,11 @@ def edit_profile(request, username):
         'prof_form': pform,
     }
     return render(request, 'profile/edit_profile.html', params)
-    
-                              
+
+def rate(request):
+    ratings = Rate.objects.all()
+    rate_params = {
+        'ratings': ratings
+    }
+
+    return render('projects.html', rate_params)    
