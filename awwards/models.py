@@ -27,8 +27,8 @@ class Profile(models.Model):
     def get_profile_data(cls):
         return Profile.objects.all()
 
-    # class Meta:
-    #     db_table = 'profiles'
+    class Meta:
+        db_table = 'profiles'
 
 class Editor(models.Model):
     first_name = models.CharField(max_length =30)
@@ -76,4 +76,43 @@ class Project(models.Model):
     @classmethod
     def get_single_project(cls, project):
         project = cls.objects.get(id=project)
-        return project                        
+        return project
+
+    class Meta:
+        db_table = 'projects'
+        ordering = ['-id']    
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=80, null=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.comment
+
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        self.delete()
+
+    class Meta:
+        db_table = 'comments'
+        ordering = ["-id"]
+
+
+class Rate(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    post = models.ForeignKey(Project, on_delete=models.PROTECT, related_name='likes', null=True)
+    design = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    usability = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], null=True)
+    creativity = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    content = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+
+    def save_rate(self):
+        self.save()
+
+    def delete_rate(self):
+        self.delete()
+
+    class Meta:
+        db_table = 'ratings'                                
