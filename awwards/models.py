@@ -30,4 +30,9 @@ class Project(models.Model):
     def todays_awward(cls):
         today = dt.date.today()
         awwards = cls.objects.filter(pub_date__date = today)
-        return awwards             
+        return awwards
+
+     @classmethod
+    def search_project_by_title(cls, search_term):
+        project = cls.objects.filter(title__icontains=search_term)
+        return project                 
