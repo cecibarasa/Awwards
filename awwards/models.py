@@ -1,14 +1,16 @@
+from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from cloudinary.models import CloudinaryField
-import datetime as dt
-from django.contrib.auth.models import User
+
 
 class Profile(models.Model):
-    profile_picture = CloudinaryField('images')
-    bio = models.TextField()
-    contact = models.CharField(max_length=100, blank=True)
+    profile_picture = CloudinaryField('image')
+    user_profile = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    bio = models.TextField(default="")
+    contact = models.CharField(max_length=200, blank=True)
+    profile_Id = models.IntegerField(default=0)
     all_projects = models.ForeignKey('Project', on_delete=models.PROTECT, null=True)
-    
 
     def __str__(self):
         return self.bio
@@ -30,20 +32,11 @@ class Profile(models.Model):
     class Meta:
         db_table = 'profiles'
 
-class Editor(models.Model):
-    first_name = models.CharField(max_length =30)
-    last_name = models.CharField(max_length =30)
-    email = models.EmailField()
-    def __str__(self):
-        return self.first_name, self.last_name
 
 class Project(models.Model):
     title = models.CharField(max_length=100)
     details = models.TextField()
-    link = models.CharField(max_length=150)
-    image = CloudinaryField('images')
-    pub_date = models.DateTimeField(auto_now_add=True)
-    # editor = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    link = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     image = CloudinaryField('image')
     user_project_id = models.IntegerField(default=0)
@@ -53,20 +46,8 @@ class Project(models.Model):
     content = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     vote_submissions = models.IntegerField(default=0)
 
-
     def __str__(self):
         return self.title
-
-    @classmethod
-    def todays_awward(cls):
-        today = dt.date.today()
-        awwards = cls.objects.filter(pub_date__date = today)
-        return awwards
-
-    @classmethod
-    def search_project_by_title(cls, search_term):
-        project = cls.objects.filter(title__name__icontains=search_term)
-        return project
 
     @classmethod
     def fetch_all_images(cls):
@@ -78,9 +59,15 @@ class Project(models.Model):
         project = cls.objects.get(id=project)
         return project
 
+    @classmethod
+    def search_project_by_title(cls, search_term):
+        project = cls.objects.filter(title__icontains=search_term)
+        return project
+
     class Meta:
         db_table = 'projects'
-        ordering = ['-id']    
+        ordering = ['-id']
+
 
 class Comment(models.Model):
     comment = models.CharField(max_length=80, null=True)
@@ -115,4 +102,4 @@ class Rate(models.Model):
         self.delete()
 
     class Meta:
-        db_table = 'ratings'                                
+        db_table = 'ratings'

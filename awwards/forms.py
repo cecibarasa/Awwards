@@ -43,7 +43,7 @@ class UpdateUserProfileForm(forms.ModelForm):
         fields = ['profile_picture', 'bio', 'contact']
 
 
-# class RatingsForm(forms.ModelForm):
-#     class Meta:
-#         model = Rate
-#         fields = ['design', 'usability', 'content', 'creativity']
+class RatingsForm(forms.ModelForm):
+    class Meta:
+        model = Rate
+        fields = ['design', 'usability', 'content', 'creativity']

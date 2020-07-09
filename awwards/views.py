@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime as dt
 from .models import *
@@ -8,11 +8,10 @@ from .forms import *
 
 def index(request):
     current_user = request.user
-    awwards = Project.todays_awward()
     date = dt.date.today()
-    project_images = Project.fetch_all_images()
+    images = Project.fetch_all_images()
     image_params = {
-        'all_images': project_images,
+        'all_images': images,
         'current_user': current_user,
     }
     return render(request, "index.html", image_params)                              
@@ -67,7 +66,7 @@ def project_view(request, post):
     return render(request, 'index.html', data)
 
 def home(request):
-    profile = Profile.objects.get(prof_user__username=request.user.username)
+    profile = Profile.objects.get(user_profile__username=request.user.username)
    
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -138,7 +137,7 @@ def upload(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('index')
+            return redirect('home')
     else:
         form = PostForm()
 
