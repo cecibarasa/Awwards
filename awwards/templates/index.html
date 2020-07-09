@@ -1,1 +1,28 @@
-{%extends 'base.html'%} {% block content %} {{block.super}} {% endblock %}
+{%extends 'base.html'%} {% block content %} {{ block.super}}
+
+<div class="container">
+
+    <!-- Looping through news   -->
+    {% for awward in awwards %}
+
+    <div class="row">
+        <!-- displaying News articles -->
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h2 class="text-center"> {{ awward.title }} </h2>
+            <h2 class="text-center"> {{ awward.details }} </h2>
+            <h2 class="text-center"> {{ awward.link }} </h2>
+            <img src="{{awward.image.url}}" class="mt-0" data-toggle="modal" data-target="#im{{image.id}}" id="myImg" class="mt-4" width="100%" alt="{{image.name}}">
+            <h2 class="text-center"> {{ awward.pub_date }} </h2>
+        </div>
+
+    </div>
+
+    {% empty %}
+    <div class="row">
+        <h2 class="text-center">There No News Items</h2>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
