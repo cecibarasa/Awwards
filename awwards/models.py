@@ -7,7 +7,7 @@ class Profile(models.Model):
     profile_picture = CloudinaryField('images')
     bio = models.TextField()
     contact = models.CharField(max_length=100, blank=True)
-    user_profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return self.bio
@@ -26,8 +26,15 @@ class Profile(models.Model):
     def get_profile_data(cls):
         return Profile.objects.all()
 
-    class Meta:
-        db_table = 'profiles'              
+    # class Meta:
+    #     db_table = 'profiles'
+
+class Editor(models.Model):
+    first_name = models.CharField(max_length =30)
+    last_name = models.CharField(max_length =30)
+    email = models.EmailField()
+    def __str__(self):
+        return self.first_name, self.last_name
 
 class Project(models.Model):
     title = models.CharField(max_length=100)
@@ -35,7 +42,7 @@ class Project(models.Model):
     link = models.CharField(max_length=150)
     image = CloudinaryField('images')
     pub_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # editor = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 
     def __str__(self):
