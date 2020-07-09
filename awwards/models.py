@@ -7,6 +7,7 @@ class Profile(models.Model):
     profile_picture = CloudinaryField('images')
     bio = models.TextField()
     contact = models.CharField(max_length=100, blank=True)
+    all_projects = models.ForeignKey('Project', on_delete=models.PROTECT, null=True)
     
 
     def __str__(self):
@@ -43,6 +44,14 @@ class Project(models.Model):
     image = CloudinaryField('images')
     pub_date = models.DateTimeField(auto_now_add=True)
     # editor = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    image = CloudinaryField('image')
+    user_project_id = models.IntegerField(default=0)
+    design = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
+    usability = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
+    creativity = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
+    content = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
+    vote_submissions = models.IntegerField(default=0)
 
 
     def __str__(self):
@@ -57,4 +66,14 @@ class Project(models.Model):
     @classmethod
     def search_project_by_title(cls, search_term):
         project = cls.objects.filter(title__name__icontains=search_term)
-        return project                 
+        return project
+
+    @classmethod
+    def fetch_all_images(cls):
+        all_images = Project.objects.all()
+        return all_images
+
+    @classmethod
+    def get_single_project(cls, project):
+        project = cls.objects.get(id=project)
+        return project                        
