@@ -14,7 +14,7 @@ def index(request):
         'all_images': images,
         'current_user': current_user,
     }
-    return render(request, "index.html", image_params)                              
+    return render(request, "index.html",{"date":date}, image_params)                              
 
 def search_results(request):
 

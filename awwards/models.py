@@ -46,7 +46,7 @@ class Project(models.Model):
     creativity = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     content = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     vote_submissions = models.IntegerField(default=0)
-    pub_date = models.DateTimeField(auto_now_add=True)
+    # pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
