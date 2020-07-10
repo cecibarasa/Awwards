@@ -29,7 +29,7 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html', {"message": message})
 
-def project_view(request, post):
+def projects(request, post):
     post = Project.objects.get(title=post)
     if request.method == 'POST':
         form = RatingsForm(request.POST)
@@ -63,7 +63,7 @@ def project_view(request, post):
         'rating_form': form
 
     }
-    return render(request, 'index.html', data)
+    return render(request, 'projects.html', data)
 
 def home(request):
     profile = Profile.objects.get(user_profile__username=request.user.username)
@@ -104,7 +104,7 @@ def signup(request):
 
 @login_required(login_url='login')
 def profile(request, username):
-    profile = Profile.objects.get(user_profile__username=request.user.username)
+    profile = Profile.objects.filter(user_profile__username=request.user.username)
     print("profile", profile)
    
     profile_data = {

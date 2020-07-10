@@ -2,11 +2,12 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from cloudinary.models import CloudinaryField
+import datetime as dt
 
 
 class Profile(models.Model):
     profile_picture = CloudinaryField('image')
-    user_profile = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    user_profile = models.ForeignKey(User, on_delete=models.CASCADE)
     bio = models.TextField(default="")
     contact = models.CharField(max_length=200, blank=True)
     profile_Id = models.IntegerField(default=0)
@@ -45,6 +46,7 @@ class Project(models.Model):
     creativity = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     content = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     vote_submissions = models.IntegerField(default=0)
+    pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

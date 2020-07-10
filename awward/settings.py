@@ -114,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_PROFILE_MODULE = 'accounts.Profile'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -136,13 +137,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = "/accounts/login/" # this is the name of the url
-LOGOUT_REDIRECT_URL = "/accounts/login/"
+LOGIN_URL = "/login/" # this is the name of the url
+LOGOUT_REDIRECT_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"
 REGISTRATION_OPEN= True
 ACCOUNT_ACTIVATION_DAYS = 5

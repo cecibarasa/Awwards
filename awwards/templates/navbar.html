@@ -32,7 +32,18 @@
                 <div> <strong><a class="text-black" href="/registration_form">Register / log
                 in</a></strong>
                 </div>
+                <ul>
+                    {% if current_user.is_authenticated%}
+                    <li>
+                        <a href="/profile/{{current_user.username}}">{{current_user.username}}</a>
+                    </li>
+                    {% else %}
+                    <!-- <li>
+                        <a href="/login"><i class="fas fa-sign-in-alt" style="width: 2px; color: whitesmoke;""></i>&nbsp;&nbsp;&nbsp; Sign in</a>
+                    </li> -->
 
+                </ul>
+                {%endif%}
                 <div class="item has-tablet" id="bt-submit">
                     <a href="/upload" class="button button-large">
                         <span>SUBMIT YOUR SITE!</span>
