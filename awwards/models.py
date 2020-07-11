@@ -7,7 +7,7 @@ import datetime as dt
 
 class Profile(models.Model):
     profile_picture = CloudinaryField('image')
-    user_profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     bio = models.TextField(default="")
     contact = models.CharField(max_length=200, blank=True)
     profile_Id = models.IntegerField(default=0)

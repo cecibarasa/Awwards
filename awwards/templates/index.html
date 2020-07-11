@@ -107,7 +107,7 @@
                 <div class="block p-0" id="block-sod">
                 </div>
 
-                <div class="block p-0">
+                <div class="block p-0" id="block">
                     <div class="inner">
                         <div class="box-heading">
                             <div class="box-left">
@@ -136,7 +136,7 @@
                                             <div class="hover-item top">
                                                 <span class="js-options-collectable"></span>
 
-                                                <span class="bt-item bt-default bt-likeit js-bt-like js-collect-like "><svg class="ico-svg" viewbox="0 0 15 14"><use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#heart"></use></svg>
+                                                <span class="bt-item bt-default bt-likeit js-bt-like js-collect-like "><p style="color: white;"><b><small>Collect</small></b></p><svg class="ico-svg" viewbox="0 0 15 14"><use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#heart"></use></svg>
                                                     {% for rating in ratings%} <span class="number"> {{rating.design}}</span> {%endfor%}
 
                                                 </span>
@@ -144,9 +144,9 @@
 
                                             <div class="hover-item bottom">
                                                 <a class="js-visit-item bt-item bt-link" href="{{image.link}}" data-identifier="our-place" data-type="submission" target="_blank" rel="noopener nofollow">
-                                                    <svg class="ico-svg" viewbox="0 0 22.24 14">
+                                                    <i class="fas fa-share" style="color: white;"></i>
                                                     <use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#link"></use>
-                                                </svg>
+                                                    </svg>
                                                 </a>
                                             </div>
 
@@ -180,7 +180,7 @@
                                                                  height="27" alt="{{image.title}}" class="lazy"/>
                                                         
                                                         {% else %}
-                                                        image{{image.profile_picture.url}}
+                                                        image{{image.profile.profile_picture.url}}
                                                         <img src=""
                                                                  width="27"
                                                                  height="27" alt="{{image.title}}" class="lazy"/>

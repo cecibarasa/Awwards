@@ -130,9 +130,10 @@ def edit_profile(request, username):
         prof_form = UpdateUserProfileForm(instance=request.user.profile)
     params = {
         'user_form': user_form,
-        'prof_form': prof_form,
+        'prof_form': prof_form
     }
     return render(request, 'profile/edit_profile.html', params)
+
 def upload(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)

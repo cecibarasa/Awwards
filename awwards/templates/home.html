@@ -7,15 +7,7 @@
             <h1 id="heading"><a href="/">Awwards</a></h1>
             <h6 class="mx-auto mt-4" id="heading-small">A collection of my favourite projects </h6> <a class="btn btn-primary mt-lg-5 mt-3 agile-link-bnr scroll" href="/" role="button">Explore</a>
 
-            <div class="banner-high-lights text-left">
 
-                <div class="rotate">
-                    <a href="#about" class="scroll">
-
-                        <span class="fa fa-long-arrow-down"><i class="fas fa-share"></i>
-</span> </a>
-                </div>
-            </div>
         </div>
     </div>
 </section>
@@ -67,7 +59,7 @@
                 {%for image in all_images %}
 
                 <div class="col-md-4 gal-img">
-                    {% if image.url %}
+                    {% if image.image %}
                     <a href="#gal1"><img src="{{image.image.url}}" alt="gallery img" class="img-fluid"></a>
                     {% else %}
                     <a href="#gal1"><img src="/static/share-alt.svg" alt="gallery img" class="img-fluid"></a>

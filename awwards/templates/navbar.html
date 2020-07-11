@@ -20,15 +20,27 @@
                         <div class="bar"></div>
                     </div>
                     <span class="has-tablet">MENU</span>
-                    <span><a href="{%url 'home'%}">Post</a></span>
                 </div>
-                <ul>
-                    {% if current_user.is_authenticated%}
-                    <li><a href="/profile/{{current_user.username}}">{{current_user.username}}</a></li>
+                <ul class="navbar-nav navbar">
+                    {% if user.is_authenticated%}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                                                                                src="{{ user.profile.profile_picture.url }}"
+                                                                                alt="" style="width: 5%; height: 10%;">
+                        </a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
+                            <hr>
+                            <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
+                            <hr>
+                            <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
 
+
+                        </div>
+                    </li>
                     {% else %}
+                    <a href="{% url 'login' %}" class="login btn btn-sm btn-info"> login </a> {% endif %}
                 </ul>
-                {%endif%}
             </div>
 
             <div class="box-right">
@@ -49,6 +61,7 @@
 
                 </div>
             </div>
+
             <div class="logo-header">
                 <a href="/" aria-label="Awwwards">
                     <svg width="141" height="22.3" viewBox="0 0 280 44.3">
