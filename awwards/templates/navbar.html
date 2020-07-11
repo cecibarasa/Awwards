@@ -43,15 +43,13 @@
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
                             <hr>
-                            <a class="dropdown-item text-center" href="{% url 'edit' user.username  %}"> Edit profile</a>
-                            <hr>
-                            <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
+                            <a href="/logout" class="text-secondary text-center dropdown-item">Log Out</a>
 
 
                         </div>
                     </li>
                     {% else %}
-                    <a href="{% url 'login' %}" class="login btn btn-sm btn-info"> login </a> {% endif %}
+                    <a href="/accounts/login" class="login btn btn-sm btn-info"> login </a> {% endif %}
                 </ul>
                 <div> <strong><a class="text-black" href="/registration_form">Register / log
                 in</a></strong>
