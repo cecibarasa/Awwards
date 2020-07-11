@@ -5,31 +5,27 @@
         <h5 class="text-center">Found {{results.count}} projects</h5>
         <div class="templates display">
 
-
-            {% if posts %}
             <div class="card-columns">
 
-                {% for post in posts %}
+                {% for post in results %}
 
                 <div class="card border-secondary">
                     <div class="container" style="height:350px;width:100%;padding:0px;">
+                        <p>{{post.title}}</p>
 
-                        <img class="card-img-top" src="{{post.image.image.url}}" alt="Card image cap" style="height:100%;">
+                        <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap" style="height:100%;">
                         <div class="middle">
                             <div class="button1 "><a id="text" style="color:white;" href="">View </a></div>
                         </div>
 
                     </div>
                 </div>
-
-
-
                 {% empty %}
                 <div class="row">
                     <h2 id="text" class="text-center">There are no posts here yet!</h2>
                 </div>
 
-                {% endfor %} {% endif %}
+                {% endfor %}
             </div>
             {% else %}
             <h4>Found 0 projects with the name you searched </h4>

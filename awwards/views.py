@@ -108,12 +108,11 @@ def signup(request):
 @login_required(login_url='login')
 def profile(request, username):
     profile = Profile.objects.filter(user_profile__username=request.user.username)
-    # print("profile", profile)
-   
-    profile_data = {
-        'profile': profile
+    
+    params = {
+        'profile':profile
     }
-    return render(request, 'profile/profile.html', profile_data)
+    return render(request, 'profile/profile.html', params)
 
 @login_required(login_url='login')
 def edit_profile(request, username):
@@ -132,7 +131,7 @@ def edit_profile(request, username):
         'user_form': user_form,
         'prof_form': prof_form
     }
-    return render(request, 'profile/edit_profile.html', params)
+    return render(request, 'profile/profile.html', params)
 
 def upload(request):
     if request.method == "POST":

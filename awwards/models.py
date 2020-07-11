@@ -38,7 +38,7 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     details = models.TextField()
     link = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='project')
     image = CloudinaryField('image',default = 'default.png')
     user_project_id = models.IntegerField(default=0)
     design = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)

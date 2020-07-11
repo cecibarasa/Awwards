@@ -36,14 +36,14 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated%}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username|title }} <img class="rounded-circle"
                                                                                 src="{{ user.profile.profile_picture.url }}"
-                                                                                alt="">
+                                                                                alt="" style="width: 5%; height: 10%;">
                         </a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
                             <hr>
-                            <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
+                            <a href="/logout" class="text-secondary text-center dropdown-item">Log Out</a>
 
 
                         </div>
