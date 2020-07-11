@@ -77,24 +77,6 @@ class Project(models.Model):
         ordering = ['-id']
 
 
-class Comment(models.Model):
-    comment = models.CharField(max_length=80, null=True)
-    user = models.ForeignKey(User, null=True, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.comment
-
-    def save_comment(self):
-        self.save()
-
-    def delete_comment(self):
-        self.delete()
-
-    class Meta:
-        db_table = 'comments'
-        ordering = ["-id"]
-
-
 class Rate(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     post = models.ForeignKey(Project, on_delete=models.PROTECT, related_name='likes', null=True)
