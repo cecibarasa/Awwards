@@ -4,7 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import re_path, path, include
 from .views import home, projects, signup, profile, edit_profile, upload, index
-
+# from django.contrib.auth import views
+from django.contrib.auth import views as auth_views
+from django_registration.backends.one_step.views import RegistrationView
 
 urlpatterns = [
     url('^$', views.index, name='awwards'),
@@ -16,6 +18,7 @@ urlpatterns = [
     path('upload/', views.upload, name='upload'),
     path('profile/<username>/settings', edit_profile, name='edit'),
     path('account/', include('django.contrib.auth.urls')),
+    url("logout/", auth_views.LogoutView.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

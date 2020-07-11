@@ -7,8 +7,8 @@ import datetime as dt
 
 class Profile(models.Model):
     profile_picture = CloudinaryField('image')
-    user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    bio = models.TextField(default="")
+    user_profile = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+    bio = models.TextField(default="bio")
     contact = models.CharField(max_length=200, blank=True)
     profile_Id = models.IntegerField(default=0)
     all_projects = models.ForeignKey('Project', on_delete=models.PROTECT, null=True)
@@ -69,7 +69,7 @@ class Project(models.Model):
         results = cls.objects.filter(title__icontains=search_term)
         return results
 
-    def delete_post(self):
+    def delete_comment(self):
         self.delete()    
 
     class Meta:

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> {% block styles %}
     <link rel="stylesheet" href="/static/css/navbar.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> {%endblock%}
 </head>
 
@@ -20,13 +21,24 @@
                         <div class="bar"></div>
                     </div>
                     <span class="has-tablet">MENU</span>
+
+                </div>
+
+            </div>
+
+            <div class="box-right">
+                <div class="item bt-search " id="js-search-container">
+                    <svg class="ico-svg" viewbox="0 0 14 14">
+                    <use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#search"></use>
+                </svg>
+
                 </div>
                 <ul class="navbar-nav navbar">
                     {% if user.is_authenticated%}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username|title }} <img class="rounded-circle nav-img"
                                                                                 src="{{ user.profile.profile_picture.url }}"
-                                                                                alt="" style="width: 5%; height: 10%;">
+                                                                                alt="" width="5%">
                         </a>
                         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
@@ -41,19 +53,10 @@
                     {% else %}
                     <a href="{% url 'login' %}" class="login btn btn-sm btn-info"> login </a> {% endif %}
                 </ul>
-            </div>
-
-            <div class="box-right">
-                <div class="item bt-search " id="js-search-container">
-                    <svg class="ico-svg" viewbox="0 0 14 14">
-                    <use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#search"></use>
-                </svg>
-
-                </div>
-
                 <div> <strong><a class="text-black" href="/registration_form">Register / log
                 in</a></strong>
                 </div>
+
                 <div class="item has-tablet" id="bt-submit">
                     <a href="/upload" class="button button-large">
                         <span>SUBMIT YOUR SITE!</span>

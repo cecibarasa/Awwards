@@ -174,13 +174,13 @@
                                                     <div class="box-byuser js-tooltip-user">
                                                         <div class="item js-user" data-username="thecouch">
                                                             <a href="">
-                                                            {% if profile.profile_picture == user %}
-                                                            <img src="{{user.profile_picture.url}}"
+                                                                {% if user.is_authenticated%}
+                                                            <img src="{{user.profile.profile_picture.url}}"
                                                                  width="27"
                                                                  height="27" alt="{{image.title}}" class="lazy"/>
                                                         
                                                         {% else %}
-                                                        image{{image.profile.profile_picture.url}}
+                                                        {{image.profile_picture.url}}
                                                         <img src=""
                                                                  width="27"
                                                                  height="27" alt="{{image.title}}" class="lazy"/>
