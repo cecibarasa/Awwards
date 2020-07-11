@@ -1,98 +1,68 @@
 from django.test import TestCase
-
-from .models import Project, Profile, User
-
-new_user = User(username='kaphie')
-
-test_project = Project(
-    id=1,
-    title='Test Hello',
-    details='a test hello world app',
-    link='https://github.com/testhello.git',
-    user=new_user, image='/media/test_hello.jpg',
-    user_project_id='1',
-    design='7',
-    usability='8',
-    creativity='9',
-    content='8',
-    vote_submissions='87'
-)
-
-
-class TestProject(TestCase):
-    def setUp(self) -> None:
-        self.new_project = Project(
-            id=1,
-            title='Hello world',
-            details='a hello world app',
-            link='https://github.com/hello.git',
-            user=new_user,
-            image='/media/hello.jpg',
-            user_project_id='1',
-            design='7',
-            usability='8',
-            creativity='9',
-            content='8',
-            vote_submissions='87'
-
-        )
-
-    def testInstance(self):
-        self.assertTrue(isinstance(self.new_project, Project))
-
-    def testSaveProject(self):
-        before = Project.objects.all()
-        self.new_project.save()
-        after = Project.objects.all()
-
-        self.assertLess(before, after)
-
-    def testDeleteProject(self):
-        before = Project.objects.all()
-        self.new_project.delete()
-        after = Project.objects.all()
-
-        self.assertGreater(before, after)
-
-    def tearDown(self) -> None:
-        Project.objects.all().delete()
+from .models import *
 
 
 class TestProfile(TestCase):
-    def setUp(self) -> None:
-        self.new_profile = Profile(
-            id=1,
-            profile_picture='media/profile.jpg',
-            prof_user=new_user,
-            bio='this is a test default bio',
-            contact_info='testcontact@mail.com',
-            profile_Id=1,
-            all_projects=test_project,
-        )
+    def setUp(self):
+        self.user = User(id=1, username='cecilia', password='1738')
+        self.user.save()
 
-    def testInstance(self):
-        self.assertTrue(isinstance(self.new_profile, Profile))
+    def test_instance(self):
+        self.assertTrue(isinstance(self.user, User))
 
-    def testSaveProfile(self):
-        before = Profile.objects.all()
-        self.new_profile.save()
-        after = Profile.objects.all()
+    def test_save_user(self):
+        self.user.save()
 
-        self.assertLess(before, after)
+    def test_delete_user(self):
+        self.user.delete()
 
-    def testEditProfile(self):
-        before = Profile.objects.all()
-        self.new_profile.save()
-        after = Profile.objects.all()
 
-        self.assertTrue(before != after)
+class ProjectTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(id=1, username='cecilia')
+        self.post = Project.objects.create(id=1, title='test post', image='https://ucarecdn.com/0ccf61ff-508e-46c6-b713-db51daa6626e', details='desc',
+                                        user=self.user, link='http://ur.coml')
 
-    def testDeleteProfile(self):
-        before = Profile.objects.all()
-        self.new_profile.save()
-        after = Profile.objects.all()
+    def test_instance(self):
+        self.assertTrue(isinstance(self.post, Project))
 
-        self.assertGreater(before, after)
+    def test_save_post(self):
+        self.post.save_post()
+        post = Project.objects.all()
+        self.assertTrue(len(post) > 0)
 
-    def tearDown(self) -> None:
-        Profile.objects.all().delete()
+    def test_get_posts(self):
+        self.post.save()
+        posts = Project.fetch_all_images()
+        self.assertTrue(len(posts) > 0)
+
+    def test_search_post(self):
+        self.post.save()
+        post = Project.search_project_by_title('test')
+        self.assertTrue(len(post) > 0)
+
+    def test_delete_post(self):
+        self.post.delete_post()
+        post = Project.search_project_by_title('test')
+        self.assertTrue(len(post) < 1)
+
+
+class RateTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(id=1, username='cecilia')
+        self.post = Project.objects.create(id=1, title='test post', image='https://ucarecdn.com/0ccf61ff-508e-46c6-b713-db51daa6626e', details='desc',
+                                        user=self.user, link='http://ur.coml')
+        self.rating = Rate.objects.create(id=1, design=6, usability=7, creativity=9, content=9, user=self.user, post=self.post)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.rating, Rate))
+
+    def test_save_rating(self):
+        self.rating.save_rate()
+        rating = Rate.objects.all()
+        self.assertTrue(len(rating) > 0)
+
+    # def test_get_post_rating(self, id):
+    #     self.rating.save()
+    #     rating = Rate.get_ratings(post_id=id)
+    #     self.assertTrue(len(rating) == 1)

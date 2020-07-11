@@ -51,6 +51,9 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+    def save_post(self):
+        self.save()    
+
     @classmethod
     def fetch_all_images(cls):
         all_images = Project.objects.all()
@@ -65,6 +68,9 @@ class Project(models.Model):
     def search_project_by_title(cls, search_term):
         results = cls.objects.filter(title__icontains=search_term)
         return results
+
+    def delete_post(self):
+        self.delete()    
 
     class Meta:
         db_table = 'projects'
