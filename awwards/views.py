@@ -13,21 +13,24 @@ def index(request):
     image_params = {
         'all_images': images,
         'current_user': current_user,
+        "date":date,
     }
-    return render(request, "index.html",{"date":date}, image_params)                              
+    return render(request, "index.html", image_params)                              
 
 def search_results(request):
-
-    if 'awward' in request.GET and request.GET["project"]:
-        search_term = request.GET.get("project")
-        searched_projects = Project.search_project_by_title(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'search.html',{"message":message,"projects": searched_articles})
-
+    if request.method == 'GET':
+        title = request.GET.get("title")
+        results = Project.objects.filter(title__icontains=title).all()
+        print(results)
+        message = f'name'
+        params = {
+            'results': results,
+            'message': message
+        }
+        return render(request, 'search.html', params)
     else:
-        message = "You haven't searched for any term"
-        return render(request, 'search.html', {"message": message})
+        message = "You haven't searched for any image "
+    return render(request, 'search.html', {'message': message})
 
 def projects(request, post):
     post = Project.objects.get(title=post)
@@ -105,12 +108,12 @@ def signup(request):
 @login_required(login_url='login')
 def profile(request, username):
     profile = Profile.objects.filter(user_profile__username=request.user.username)
-    print("profile", profile)
+    # print("profile", profile)
    
     profile_data = {
         'profile': profile
     }
-    return render(request, 'profile/profile.html', profile_data)
+    return render(request, 'profile/edit_profile.html', profile_data)
 
 @login_required(login_url='login')
 def edit_profile(request, username):
@@ -123,11 +126,11 @@ def edit_profile(request, username):
             prof_form.save()
             return redirect('profile', user.username)
     else:
-        uform = UpdateUserForm(instance=request.user)
-        pform = UpdateUserProfileForm(instance=request.user.profile)
+        user_form = UpdateUserForm(instance=request.user)
+        prof_form = UpdateUserProfileForm(instance=request.user.profile)
     params = {
-        'user_form': uform,
-        'prof_form': pform,
+        'user_form': user_form,
+        'prof_form': prof_form,
     }
     return render(request, 'profile/edit_profile.html', params)
 def upload(request):
@@ -137,12 +140,12 @@ def upload(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('home')
+            return redirect('/')
     else:
         form = PostForm()
 
 
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'home.html', {'form': form})
 
 
 def rate(request):

@@ -63,8 +63,8 @@ class Project(models.Model):
 
     @classmethod
     def search_project_by_title(cls, search_term):
-        project = cls.objects.filter(title__icontains=search_term)
-        return project
+        results = cls.objects.filter(title__icontains=search_term)
+        return results
 
     class Meta:
         db_table = 'projects'

@@ -8,10 +8,7 @@
     {% endif %}
     <p class="text-center">{{user.username}}</p>
     <p class="text-center"> {{user.email}}</p>
-    <form action="" id="form" method="post" enctype="multipart/form-data" class="form-control">
-        {% csrf_token %} {{user_form|crispy}} {{prof_form|crispy}}
-        <button type="submit" class="btn btn-sm btn-info">Update</button>
-    </form>
+
 </div>
 
 

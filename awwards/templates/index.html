@@ -136,11 +136,8 @@
                                             <div class="hover-item top">
                                                 <span class="js-options-collectable"></span>
 
-                                                <span class="bt-item bt-default bt-likeit js-bt-like js-collect-like ">
-                    <svg class="ico-svg" viewbox="0 0 15 14">
-        <use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#heart"></use>
-    </svg>
-           {% for rating in ratings%} <span class="number"> {{rating.design}}</span> {%endfor%}
+                                                <span class="bt-item bt-default bt-likeit js-bt-like js-collect-like "><svg class="ico-svg" viewbox="0 0 15 14"><use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#heart"></use></svg>
+                                                    {% for rating in ratings%} <span class="number"> {{rating.design}}</span> {%endfor%}
 
                                                 </span>
                                             </div>
@@ -168,7 +165,7 @@
                                                     <div class="box-left">From United States</div>
 
                                                     <div class="box-right">
-                                                        October 18, 2019
+                                                        {{date|date:"l d-F Y"}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,13 +174,13 @@
                                                     <div class="box-byuser js-tooltip-user">
                                                         <div class="item js-user" data-username="thecouch">
                                                             <a href="">
-                                                            {% if profile.profile_picture %}
-                                                            <img src="{{profile.profile_picture.url}}"
+                                                            {% if profile.profile_picture == user %}
+                                                            <img src="{{user.profile_picture.url}}"
                                                                  width="27"
                                                                  height="27" alt="{{image.title}}" class="lazy"/>
                                                         
                                                         {% else %}
-                                                        image{{image.user.prof_user.profile_picture.url}}
+                                                        image{{image.profile_picture.url}}
                                                         <img src=""
                                                                  width="27"
                                                                  height="27" alt="{{image.title}}" class="lazy"/>

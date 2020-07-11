@@ -8,6 +8,7 @@ from .views import home, projects, signup, profile, edit_profile, upload, index
 
 urlpatterns = [
     url('^$', views.index, name='awwards'),
+    url(r'^home/', views.home, name='home'),
     url(r'^search/', views.search_results, name='search_results'),
     path('profile/<username>/', profile, name='profile'),
     path('registration_form/', views.signup, name='signup'),
