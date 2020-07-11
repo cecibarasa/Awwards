@@ -113,7 +113,7 @@ def profile(request, username):
     profile_data = {
         'profile': profile
     }
-    return render(request, 'profile/edit_profile.html', profile_data)
+    return render(request, 'profile/profile.html', profile_data)
 
 @login_required(login_url='login')
 def edit_profile(request, username):

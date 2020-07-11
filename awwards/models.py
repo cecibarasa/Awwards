@@ -6,9 +6,9 @@ import datetime as dt
 
 
 class Profile(models.Model):
-    profile_picture = CloudinaryField('image')
+    profile_picture = CloudinaryField('image',default = 'default.png')
     user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    bio = models.TextField(default="")
+    bio = models.TextField(default="Awward me")
     contact = models.CharField(max_length=200, blank=True)
     profile_Id = models.IntegerField(default=0)
     all_projects = models.ForeignKey('Project', on_delete=models.PROTECT, null=True)
@@ -39,7 +39,7 @@ class Project(models.Model):
     details = models.TextField()
     link = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = CloudinaryField('image')
+    image = CloudinaryField('image',default = 'default.png')
     user_project_id = models.IntegerField(default=0)
     design = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
     usability = models.IntegerField(choices=list(zip(range(0, 11), range(0, 11))), default=0)
