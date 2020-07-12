@@ -43,49 +43,5 @@
         <button type="submit" class="btn">Submit Project</button>
     </form>
 </div>
-<section class="gallery py-5" id="gallery">
-
-    <div class="container">
-
-        <div class="inner-sec-wthree py-lg-5 py-3">
-
-            <div class="text-center">
-                <h3 class="tittle_head">Collection</h3>
-
-                <p class="main_p mt-4 mb-4 pt-2 text-center mx-auto">A collection of projects.</p>
-            </div>
-
-            <div class="row news-grids mt-lg-5 mt-4 text-center">
-                {%for image in all_images %}
-
-                <div class="col-md-4 gal-img">
-                    {% if image.image %}
-                    <a href="#gal1"><img src="{{image.image.url}}" alt="gallery img" class="img-fluid"></a>
-                    {% else %}
-                    <a href="#gal1"><img src="/static/share-alt.svg" alt="gallery img" class="img-fluid"></a>
-                    {% endif %}
-                    <div class="mr-3 ml-3">
-                        <p class="mt-2">{{image.title}}</p>
-                        <div class="user-details">
-                            <p>from location</p>
-                            <p> date {{date|date:"l d-F Y"}}</p>
-
-                        </div>
-                        <div class="p-and-t-row">
-                            <div class="prof-row">
-                                <img src="" alt="">
-                                <p>By {{user.user.name}} name</p>
-                            </div>
-                            <div class="tag-row">
-                                <p><span>html</span> <span>css</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
 
 {% endblock %}
