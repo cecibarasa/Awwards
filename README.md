@@ -1,3 +1,5 @@
+[![codebeat badge](https://codebeat.co/badges/b094a352-7f6b-455d-8d42-eb15dc94413e)](https://codebeat.co/projects/github-com-cecibarasa-awwards-master)
+
 ### AWWARDS
 
 ### By Cecilia Barasa
