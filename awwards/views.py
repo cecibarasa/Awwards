@@ -155,6 +155,6 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class ProfileViewSet(viewsets.ModelViewSet):
+class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer    
