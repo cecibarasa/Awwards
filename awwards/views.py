@@ -42,19 +42,19 @@ def projects(request, post):
     usability = rate.aggregate(Avg('usability'))['usability__avg']
     content = rate.aggregate(Avg('content'))['content__avg']
     creativity = rate.aggregate(Avg('creativity'))['creativity__avg']
-    # average = rate.aggregate(Avg('average'))['average__avg']
+    average = rate.aggregate(Avg('average'))['average__avg']
     if request.method == 'POST':
         form = RatingsForm(request.POST)
         if form.is_valid():
             rate = form.save(commit=False)
-            rate.average = (rate.design + rate.usability + rate.content) / 3
+            rate.average = (rate.design + rate.usability + rate.content + rate.creativity) / 4
             rate.post = post
             rate.user = user
             rate.save()
         return redirect('project', post)
     else:
         form = RatingsForm()
-    return render(request, 'projects.html', {'post': post, 'rate': rate, 'rating_form': form, 'design': design, 'usability': usability, 'content': content,'creativity':creativity})
+    return render(request, 'projects.html', {'post': post, 'rate': rate, 'rating_form': form, 'design': design, 'usability': usability, 'content': content,'creativity':creativity, 'average':average})
 
 def home(request):
     profile = Profile.objects.get(user_profile__username=request.user.username)
@@ -134,13 +134,4 @@ def upload(request):
         form = PostForm()
 
 
-    return render(request, 'home.html', {'form': form})
-
-
-def rate(request):
-    ratings = Rate.objects.all()
-    rate_params = {
-        'ratings': ratings
-    }
-
-    return render('projects.html', rate_params)    
+    return render(request, 'home.html', {'form': form})   
