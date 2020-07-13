@@ -84,6 +84,7 @@ class Rate(models.Model):
     usability = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], null=True)
     creativity = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
     content = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+    average = models.IntegerField(default=0)
 
     def save_rate(self):
         self.save()
