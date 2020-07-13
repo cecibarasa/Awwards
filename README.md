@@ -10,6 +10,11 @@ This is an application that allows users to post a project he/she has created to
 ### Preview
 ![](Screenshotf.png)
 
+## API Endpoints
+* (Profile API)[https://the-awwwards.herokuapp.com/profiles/]
+* (User API)[https://the-awwwards.herokuapp.com/users/]
+* (Project API)[https://the-awwwards.herokuapp.com/projects/]
+
 # Setup and installation requirements
 * `Virtual environment`
 * `pip install -r requirements.txt`
