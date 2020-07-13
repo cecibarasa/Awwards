@@ -6,6 +6,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login,logout
 from .forms import *
 from django.db.models import Avg
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import *
+from rest_framework import status
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from rest_framework import viewsets
+from .permissions import IsAdminOrReadOnly
+
 
 def index(request):
     current_user = request.user
@@ -134,4 +142,18 @@ def upload(request):
         form = PostForm()
 
 
-    return render(request, 'home.html', {'form': form})   
+    return render(request, 'home.html', {'form': form})
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = (IsAdminOrReadOnly,)
+    
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer    

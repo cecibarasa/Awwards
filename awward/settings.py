@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'awwards',
     'bootstrap3',
     'cloudinary',
+    'rest_framework',
+    'rest_framework.authtoken'
     
 ]
 
@@ -147,3 +149,9 @@ LOGOUT_REDIRECT_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"
 REGISTRATION_OPEN= True
 ACCOUNT_ACTIVATION_DAYS = 5
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
