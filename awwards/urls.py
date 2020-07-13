@@ -3,7 +3,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import re_path, path, include
-from .views import *
+from .views import home, edit_profile, projects, signup, profile, upload, index
 # from django.contrib.auth import views
 from django.contrib.auth import views as auth_views
 from django_registration.backends.one_step.views import RegistrationView

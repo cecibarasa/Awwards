@@ -12,7 +12,7 @@ from .serializer import *
 from rest_framework import status
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from rest_framework import viewsets
-from .permissions import IsAdminOrReadOnly
+
 
 
 def index(request):
@@ -56,6 +56,7 @@ def projects(request, post):
         if form.is_valid():
             rate = form.save(commit=False)
             rate.average = (rate.design + rate.usability + rate.content + rate.creativity) / 4
+            # print(rate.average)
             rate.post = post
             rate.user = user
             rate.save()
@@ -144,16 +145,16 @@ def upload(request):
 
     return render(request, 'home.html', {'form': form})
 
-class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+# class ProfileViewSet(viewsets.ModelViewSet):
+#     queryset = Profile.objects.all()
+#     serializer_class = ProfileSerializer
+#     # permission_classes = (IsAdminOrReadOnly,)
     
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
 
-class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all()
-    serializer_class = ProjectSerializer    
+# class ProfileViewSet(viewsets.ModelViewSet):
+#     queryset = Project.objects.all()
+#     serializer_class = ProjectSerializer    
